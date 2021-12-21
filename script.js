@@ -1,29 +1,20 @@
-let ingredientItems = [
-    '',
-    '',
-    '',
-    '',
-    ''
-]
-let sectionItems = [
-    '',
-    '',
-    '',
-    '',
-    ''
-]
 
 
+let colors = ['black','orange','green','red']
 let sectionsList = document.querySelector('#pixel-board');
-let ingredientListPai = document.querySelector('#pixel-board');
-let enderecoPixelIndividual=[];
 
+function limpa(){
+    let  pixel =listaPixel.flat(Infinity)
+    for (let i of pixel){
+         i.style.backgroundColor ='white'
+     }
+}
 function criaLi(sectionsAserCriado) {
     let listaPixels = [];
-    for(let i in ingredientItems){
-        let itemAtual= ingredientItems[i];
+    for(let i =0; i< 5; i++ ){
+      
         let itemASerCriado = document.createElement('li');
-        itemASerCriado.innerText=itemAtual;
+   
         itemASerCriado.addEventListener('click', pintar);
         sectionsAserCriado.appendChild(itemASerCriado);
         itemASerCriado.setAttribute('class', 'pixel');
@@ -35,11 +26,9 @@ function criaLi(sectionsAserCriado) {
 function criaUl(){
     let listaPixels = [];
 
-    for (let j in sectionItems){
+    for (let j=0; j<5; j+=1){
         
-        let sectionsAtual =sectionItems[j];
         let sectionsAserCriado = document.createElement('ul');
-        sectionsAserCriado.innerText=sectionsAtual;              
         sectionsList.appendChild(sectionsAserCriado);
         sectionsAserCriado.setAttribute('class', 'ingredients-list')
         let pixelCriado = criaLi(sectionsAserCriado);
@@ -51,9 +40,12 @@ function criaUl(){
   
      return listaPixels;
 } 
-    var listaPixel= criaUl();
+function pintar() {
 
-let colors = ['black','orange','green','red']
+    this.style.backgroundColor =document.querySelectorAll('.selected')[0].id
+ 
+ 
+}  
 
 function selecionaCorID(cores){
     let classeSelecionada
@@ -77,36 +69,17 @@ function criaOuvidor(listaID){
 
     }
 }
+function corSelecionada(){
 
-
-let listaID = selecionaCorID(colors)
-
-criaOuvidor(listaID)
-
-
-    function corSelecionada(){
-
-        document.querySelectorAll('.selected')[0].classList.remove('selected')
-        this.classList.add('selected')
-        
-    }
-
-
- function pintar() {
-
-   this.style.backgroundColor =document.querySelectorAll('.selected')[0].id
-
-
- }  
-
-
-
- document.getElementById('clear-board').addEventListener('click', ()=>{
-          let  pixel =listaPixel.flat(Infinity)
-          for (let i of pixel){
-                i.style.backgroundColor ='white'
-
-
-           }
+    document.querySelectorAll('.selected')[0].classList.remove('selected')
+    this.classList.add('selected')
     
- })
+}
+
+
+
+let  listaPixel= criaUl();
+let listaID = selecionaCorID(colors)
+criaOuvidor(listaID)
+document.getElementById('clear-board').addEventListener('click', limpa)
+
